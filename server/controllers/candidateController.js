@@ -1,5 +1,5 @@
-const Candidate = require('../models/candidateModel')
 const mongoose = require('mongoose')
+const candidateService = require('../services/candidates')
 
 const getCandidateById = async (req,res,next) => {
     const id = req.params.id;
@@ -13,6 +13,22 @@ const getCandidateById = async (req,res,next) => {
         res.status(200).json(payment);
     } catch (error) {
         
+    }
+}
+
+const putCandidate = async (req, res, next) => {
+    const {ime, prezime, JMBG, telefon, email, slika} = req.body;
+    try{
+        if(telefon || ime || prezime || JMBG || email || slika){
+            const error = new Error("Niste poslali neophoden podatke");
+            error.status = 400;
+            throw error;
+        }
+        const jwt = await candidateService.addNewCandidate(ime, prezime, JMBG, telefon, email, slika);
+        res.status(201).json({token: jwt});
+    }catch(error){
+        console.log(error);
+        next(error);
     }
 }
 
