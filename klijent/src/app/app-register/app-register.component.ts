@@ -16,19 +16,19 @@ export class AppRegisterComponent implements OnInit, OnDestroy {
   //public returnUrl: string;
    
 
-  constructor(//private formBuilder: FormBuilder,
+  constructor(private formBuilder: FormBuilder,
               //private router: Router,
               //private route: ActivatedRoute,
               private candidateService: CandidateService
     ) { 
      // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'home';
-      this.registerForm = new FormGroup({
-        email: new FormControl('', [Validators.required, Validators.email]),
-        ime : new FormControl('', [Validators.required]),
-        prezime : new FormControl('', [Validators.required]),
-        jmbg : new FormControl('', [Validators.required, Validators.pattern('^[0-9]{13}$'), Validators.minLength(13), Validators.maxLength(13)]),
-        telefon : new FormControl('', [Validators.required, Validators.minLength(7)])
-    });
+     this.registerForm = this.formBuilder.group({
+        email: ['',[Validators.required, Validators.pattern('[A-Z][a-z]+')]],
+        ime : ['', [Validators.required, Validators.pattern('[A-Z][a-z]+')]],
+        prezime : ['', [Validators.required, Validators.pattern('[A-Z][a-z]+')]],
+        jmbg :['', [Validators.required, Validators.pattern('^[0-9]{13}$'), Validators.minLength(13), Validators.maxLength(13)]],
+        telefon : ['', [Validators.required, Validators.minLength(7)]]
+    }) ;
     }
 
   ngOnInit(): void {
@@ -39,6 +39,35 @@ export class AppRegisterComponent implements OnInit, OnDestroy {
     this.candidateService.addNewCandidate(this.registerForm.value.ime, this.registerForm.value.prezime,
       this.registerForm.value.jmbg, this.registerForm.value.telefon, this.registerForm.value.email, this.registerForm.value.slika).subscribe((result: Candidate | null)=>
       this.candidate = result)
+  }
+
+  public ime()
+  {
+    
+    return this.registerForm.get('ime') ;
+  }
+
+
+  public prezime()
+  {
+    
+    return this.registerForm.get('prezime') ;
+  }
+
+
+  public email()
+  {
+    return this.registerForm.get('email');
+  }
+
+  public jmbg()
+  {
+    return this.registerForm.get('jmbg');
+  }
+
+   public telefon()
+  {
+    return this.registerForm.get('telefon');
   }
 
   ngOnDestroy(): void {

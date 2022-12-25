@@ -20,29 +20,50 @@
          <div class="container">
             <div class="center verticle_center full_height">
                <div class="login_section">
-                  <div class="login_form">
+                  <div class="login_form" id="log">
                      <form [formGroup]= "registerForm" (ngSubmit)="onSubmit()">
                         <fieldset>
-                           <div class="field">
+                           <div class="field ">
                               <label class="label_field">Ime</label>
-                              <input class="form-control" type="text" formControlName="ime"  placeholder="Ime" />
+                              <input class="form-control" type="text" name="ime" formControlName="ime"  placeholder="Ime" ng-model="ime" ng-required="true"/>
                            </div>
+
+                           <p class="error-message" *ngIf="ime()?.errors?.required">Morate uneti ime.</p>
+                           <p class="error-message" *ngIf="ime()?.errors?.pattern">Ime se mora sastojati od bar 2 karaktera.</p>
+
                            <div class="field">
                             <label class="label_field">Prezime</label>
                             <input class="form-control" type="text" formControlName="prezime" placeholder="Prezime" />
                          </div>
+
+                         <p class="error-message" *ngIf="prezime()?.errors?.required">Morate uneti prezime.</p>
+                         <p class="error-message" *ngIf="prezime()?.errors?.pattern">Prezime se mora sastojati od bar 2 karaktera i počinjati velikim slovom.</p>
+
                            <div class="field">
                               <label class="label_field">JMBG</label>
                               <input class="form-control" type="text" formControlName="jmbg" placeholder="JMBG" />
                            </div>
+
+                           <p class="error-message" *ngIf="jmbg()?.errors?.required">Morate uneti jmbg.</p>
+                           <p class="error-message" *ngIf="jmbg()?.errors?.pattern">Jmbg nije ispravan.</p>
+
                            <div class="field">
                             <label class="label_field">Telefon</label>
                             <input class="form-control" type="text" formControlName="telefon" placeholder="Telefon" />
                          </div>
+
+                         <p class="error-message" *ngIf="telefon()?.errors?.required">Morate uneti telefon.</p>
+                         <p class="error-message" *ngIf="telefon()?.errors?.minLength">Telefon nije ispravan.</p>
+
                          <div class="field">
                             <label class="label_field">Email adresa</label>
                             <input class="form-control" type="text" formControlName="email" placeholder="Email" />
                          </div>
+
+                         <p class="error-message" *ngIf="email()?.errors?.required">Morate uneti mejl.</p>
+                         <p class="error-message" *ngIf="email()?.errors?.email">Email nije ispravan.</p>
+                         
+             
                          <div class="field">
                             <label class="label_field">Slika</label>
                             <input class="form-control" formControlName="slika" type="file" name="image"  id="image" placeholder="Izaberi sliku...">
@@ -57,7 +78,7 @@
                </div>
               <div class="pic_section">
                 <div class="picregister">
-                    <img id="slikareg" src="../../assets/registerslika.png" width="450" height="540">
+                    <img id="slikareg" src="../../assets/registerslika.png" width="450" height="780">
                 </div>
               </div>
             </div>
