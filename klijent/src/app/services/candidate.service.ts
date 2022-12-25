@@ -11,7 +11,7 @@ import { ICandidate, Candidate } from '../models/candidate';
 @Injectable({
   providedIn: 'root'
 })
-export class PaymentsService {
+export class CandidateService {
 
   constructor(private http: HttpClient) { }
 
@@ -25,8 +25,8 @@ export class PaymentsService {
       )
   }*/
 
-  public addNewCandidate(ime: string, prezime:string, JMBG:string, telefon:string, email:string, slika:string){
-    return this.http.post(`http://localhost:3002/candidate/new`,{
+  public addNewCandidate(ime: string, prezime:string, JMBG:string, telefon:string, email:string, slika:string):Observable<Candidate | null>{
+    return this.http.post<ICandidate | null>(`http://localhost:3002/candidate/new`,{
         ime: ime, 
         prezime: prezime, 
         jmbg: JMBG, 
