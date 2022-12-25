@@ -24,15 +24,15 @@
                     
                   </div>
                   <div class="login_form">
-                     <form>
+                     <form [formGroup]= "loginForm" (ngSubmit)="onSubmit()">
                         <fieldset>
                            <div class="field">
                               <label class="label_field">ID kandidata</label>
-                              <input type="id" name="id" placeholder="ID" />
+                              <input class="form-control" type="text" formControlName="id" placeholder="ID" />
                            </div>
                            <div class="field">
                               <label class="label_field">Lozinka</label>
-                              <input type="password" name="password" placeholder="Lozinka" />
+                              <input class="form-control" type="text" formControlName="lozinka" placeholder="Lozinka" />
                            </div>
                            <div class="field">
                               <label class="label_field hidden">hidden label</label>
@@ -41,7 +41,7 @@
                            </div>
                            <div class="field margin_0">
                               <label class="label_field hidden">hidden label</label>
-                              <button class="main_bt">Prijavi se</button>
+                              <button type="submit" class="btn btn-success btn-block">Prijavi se</button>
                            </div>
                         </fieldset>
                      </form>

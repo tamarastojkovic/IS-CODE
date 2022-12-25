@@ -63,17 +63,18 @@ const addGroup = async (req,res,next) => {
 }
 
 const loginUser = async (req, res, next) => {
-    const {id, password} =req.body;
+
+    const {id, lozinka} =req.body;
    
-    if(id && password){
+    if(id && lozinka){
         var user = await candidateService.getCandidateById(id);
     }
 
     if(!user)
       return res.status(401).json({message:"No such user"})
  
-    if(await bcrypt.compare(password, user.lozinka.hashPass)){
-      
+    if(await bcrypt.compare(lozinka, user.lozinka.hashPass)){
+
       const token = jwt.generateJWT({id:user._id});
       user.lozinka=undefined;
      

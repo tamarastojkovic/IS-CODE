@@ -36,6 +36,13 @@ export class CandidateService {
     })
   }
 
+  public login(id: string, lozinka:string):Observable<any>{
+    return this.http.post<any>(`http://localhost:3002/candidate/login`,{
+        id,
+        lozinka
+    })
+  }
+
   /*public getPaymentById(id): Observable<Result> {
     return this.http.get<Result>(`http://localhost:3000/payments/id/${id}`)
   }*/
