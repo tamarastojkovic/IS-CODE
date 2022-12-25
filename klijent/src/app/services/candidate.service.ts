@@ -25,11 +25,11 @@ export class CandidateService {
       )
   }*/
 
-  public addNewCandidate(ime: string, prezime:string, JMBG:string, telefon:string, email:string, slika:string):Observable<Candidate | null>{
+  public addNewCandidate(ime: string, prezime:string, jmbg:string, telefon:string, email:string, slika:string):Observable<Candidate | null>{
     return this.http.post<ICandidate | null>(`http://localhost:3002/candidate/new`,{
         ime,
         prezime, 
-        JMBG, 
+        jmbg, 
         telefon, 
         email, 
         slika

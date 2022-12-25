@@ -21,15 +21,16 @@ const getCandidateById = async (req,res,next) => {
 }
 
 const putCandidate = async (req, res, next) => {
-    const {ime, prezime, JMBG, telefon, email, slika} = req.body;
+    const {ime, prezime, jmbg, telefon, email, slika} = req.body;
     try{
-        if(!telefon || !ime || !prezime || !JMBG || !email || !slika){
+        if(!telefon || !ime || !prezime || !jmbg || !email ){
+            console.log(telefon, ime, prezime, jmbg, email)
             const error = new Error("Niste poslali neophoden podatke");
             error.status = 400;
             throw error;
         }
-        const jwt = await candidateService.addNewCandidate(ime, prezime, JMBG, telefon, email, slika);
-        mailService.sednMailTo(email, `Account created", "New account with id: 1 and password: ${JMBG}`);
+        const jwt = await candidateService.addNewCandidate(ime, prezime, jmbg, telefon, email, slika);
+        //mailService.sednMailTo(email, `Account created", "New account with id: 1 and password: ${jmbg}`);
         res.status(201).json({token: jwt});
     }catch(error){
         console.log(error);

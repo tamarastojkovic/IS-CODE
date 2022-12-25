@@ -26,7 +26,7 @@ export class AppRegisterComponent implements OnInit, OnDestroy {
         email: new FormControl('', [Validators.required, Validators.email]),
         ime : new FormControl('', [Validators.required]),
         prezime : new FormControl('', [Validators.required]),
-        JMBG : new FormControl('', [Validators.required, Validators.pattern('^[0-9]{13}$'), Validators.minLength(13), Validators.maxLength(13)]),
+        jmbg : new FormControl('', [Validators.required, Validators.pattern('^[0-9]{13}$'), Validators.minLength(13), Validators.maxLength(13)]),
         telefon : new FormControl('', [Validators.required, Validators.minLength(7)])
     });
     }

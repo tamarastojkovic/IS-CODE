@@ -11,9 +11,9 @@ const getPassword = async (lozinka) => {
 var listaKandidata = [];
 var idCounter=1
 
-const addNewCandidate = async function (ime, prezime, JMBG, telefon, email, slika){
+const addNewCandidate = async function (ime, prezime, jmbg, telefon, email, slika){
     
-        const lozinka = await getPassword(JMBG);
+        const lozinka = await getPassword(jmbg);
         console.log(lozinka);
         const candidate = {
             _id: idCounter++,
@@ -23,7 +23,7 @@ const addNewCandidate = async function (ime, prezime, JMBG, telefon, email, slik
             email: email,
             pol: "m",
             telefon: telefon,
-            jmbg:JMBG ,
+            jmbg:jmbg ,
             datumRođenja :null,
             datumUpisa :null,
             idInstruktora: null,
