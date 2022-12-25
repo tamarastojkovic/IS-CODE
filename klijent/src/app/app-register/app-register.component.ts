@@ -17,7 +17,7 @@ export class AppRegisterComponent implements OnInit, OnDestroy {
    
 
   constructor(//private formBuilder: FormBuilder,
-              //private router: Router,
+              private router: Router,
               //private route: ActivatedRoute,
               private candidateService: CandidateService
     ) { 
@@ -37,8 +37,11 @@ export class AppRegisterComponent implements OnInit, OnDestroy {
 
   public onSubmit(){
     this.candidateService.addNewCandidate(this.registerForm.value.ime, this.registerForm.value.prezime,
-      this.registerForm.value.jmbg, this.registerForm.value.telefon, this.registerForm.value.email, this.registerForm.value.slika).subscribe((result: Candidate | null)=>
-      this.candidate = result)
+      this.registerForm.value.jmbg, this.registerForm.value.telefon, this.registerForm.value.email, this.registerForm.value.slika).subscribe((result: Candidate | null)=>{
+      this.candidate = result
+      if(this.candidate)
+         this.router.navigateByUrl('/login')
+    })
   }
 
   ngOnDestroy(): void {
