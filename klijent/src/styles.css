@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import '../../style.css';
+@import '../../css/animate.css';
+@import '../../css/bootstrap.css';
+@import '../../css/bootstrap.min.css';
+@import '../../css/custom.css';
+@import '../../css/responsive.css';
+@import '../../css/perfect-scrollbar.css';
+
