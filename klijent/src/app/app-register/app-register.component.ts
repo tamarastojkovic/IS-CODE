@@ -12,7 +12,7 @@ import { Candidate } from '../models/candidate';
 export class AppRegisterComponent implements OnInit, OnDestroy {
 
   public registerForm: FormGroup;
-  public candidate: Candidate | null;
+  public candidate: Candidate | null | undefined;
   //public returnUrl: string;
    
 
