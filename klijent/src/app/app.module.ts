@@ -7,12 +7,14 @@ import { AppRegisterComponent } from './app-register/app-register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { CandidateProfileComponent } from './candidate-profile/candidate-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppRegisterComponent,
-    LoginComponent
+    LoginComponent,
+    CandidateProfileComponent
   ],
   imports: [
     BrowserModule,
