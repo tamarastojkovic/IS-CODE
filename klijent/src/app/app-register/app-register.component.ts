@@ -17,7 +17,7 @@ export class AppRegisterComponent implements OnInit, OnDestroy {
 
 
   constructor(private formBuilder: FormBuilder,
-              //private router: Router,
+              private router: Router,
               //private route: ActivatedRoute,
               private candidateService: CandidateService
     ) {
@@ -25,7 +25,7 @@ export class AppRegisterComponent implements OnInit, OnDestroy {
      this.registerForm = this.formBuilder.group({
         email: ['',[Validators.required, Validators.pattern('[A-Z][a-z]+')]],
         ime : ['', [Validators.required, Validators.pattern('[A-Z][a-z]+')]],
-        prezime : ['', [Validators.required, Validators.pattern('[A-Z][a-z]+')]],
+        prezime : ['', [Validators.required]],
         jmbg :['', [Validators.required, Validators.pattern('^[0-9]{13}$'), Validators.minLength(13), Validators.maxLength(13)]],
         telefon : ['', [Validators.required, Validators.minLength(7)]]
     }) ;
