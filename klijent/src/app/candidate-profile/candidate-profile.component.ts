@@ -62,4 +62,10 @@ export class CandidateProfileComponent implements OnInit, OnDestroy {
     return date.getDate().toString() + "-" + month.toString() + "-" + date.getFullYear().toString();
   }
 
+  public onClick(idGroup: number):void{
+    let idG = idGroup +1;
+    this.candidateService.setGroupCandidate(idG.toString()).subscribe();
+    window.location.reload();
+  }
+
 }

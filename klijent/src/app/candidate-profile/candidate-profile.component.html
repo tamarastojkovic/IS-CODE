@@ -141,7 +141,7 @@
                                                                            <br>
                                                                            <li style="font-size: 16px;"><i class="fa fa-birthday-cake"></i> : <b>{{this.getDate()}}</b></li>
                                                                            <li style="font-size: 16px;"><i class="fa fa-calendar"></i> : <b>{{this.getCurrentDate()}}</b></li>
-                                                                           <li style="font-size: 16px;"><i class="fa fa-book"></i><b>{{candidate.idGrupe}}</b> : /</li>
+                                                                           <li style="font-size: 16px;"><i class="fa fa-book"></i><b></b> : / {{candidate.idGrupe}}</li>
                                                                            <li style="font-size: 16px;"><i class="fa fa-car"></i><b> instruktor</b> : /</li>
                                                                         </ul>
                                                                      </div>
@@ -173,10 +173,10 @@
                                                       </div>
                                                    
                                                    </div>
-                                                   
-                                                   <div class="msg_list_main">
+                                             
+                                                   <div class="msg_list_main" *ngIf = "candidate.idGrupe == null">
                                                       <ul class="msg_list">
-                                                         <li *ngFor = "let group of groups">
+                                                         <li *ngFor = "let group of groups; let i = index">
                                                             <span><i class="fa fa-book" id="stiker"></i></span>
                                                             <span>
                                                             <span class="name_user">Grupa {{group.id}}</span>
@@ -186,7 +186,7 @@
                                                             </span>
                                                             <div class="field margin_0" id="dugmeGrupa">
                                                                <label class="label_field hidden">hidden label</label>
-                                                               <button class="main_bt_1">Izaberi grupu</button>
+                                                               <button type ="button" (click)="onClick(i)" class="main_bt_1">Izaberi grupu</button>
                                                             </div>
                                                          </li>
                                                       </ul>

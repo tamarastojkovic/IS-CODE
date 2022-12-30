@@ -47,6 +47,7 @@ const addGroup = async (req,res,next) => {
             error.status = 400;
             throw error;
         }
+        console.log("Setovanje grupee1");
         const updatedCandidate = await candidateService.setGroup(idGroup, id);
         if(!updatedCandidate){
             const error = new Error("Ne postoji kandidat sa tim identifikatorom");

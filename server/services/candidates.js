@@ -54,8 +54,11 @@ const getCandidateById = async function (id) {
 
 
 const setGroup = async function(idGrupe, idKandidata){
-    candidate = getCandidateById(idKandidata);
+    console.log("Setovanje grupee");
+    candidate = await getCandidateById(idKandidata);
     candidate.idGrupe = idGrupe;
+    console.log("Setovanje grupee");
+    console.log(candidate)
     return candidate;
 }
 module.exports = {addNewCandidate, listaKandidata, getCandidateById, setGroup}

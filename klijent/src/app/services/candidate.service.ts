@@ -19,7 +19,8 @@ export class CandidateService {
   private readonly url = {
     login: `http://localhost:3002/candidate/login`,
     candidateId: `http://localhost:3002/candidate/id`,
-    groups: `http://localhost:3002/group`
+    groups: `http://localhost:3002/group`,
+    candidateGroupAdd: `http://localhost:3002/candidate/group`
   }
   public currentUser : Candidate | undefined | null;
   
@@ -58,12 +59,21 @@ export class CandidateService {
   public getCandidate(id: string):Observable<CandidateDto>{
     let headers : HttpHeaders = new HttpHeaders().append("Authorization", `Bearer ${localStorage.getItem('USER_JWT_TOKEN')}`);
 
-    return this.http.get<Candidate>(this.url.candidateId+"/"+id, {headers});
+    return this.http.get<CandidateDto>(this.url.candidateId+"/"+id, {headers});
   }
 
   public getAllGroups(): Observable<Group[]>{
     let headers : HttpHeaders = new HttpHeaders().append("Authorization", `Bearer ${localStorage.getItem('USER_JWT_TOKEN')}`);
     return this.http.get<Group[]>(this.url.groups, {headers});
+  }
+
+  public setGroupCandidate(idGroup : string): Observable<any> {
+    let headers : HttpHeaders = new HttpHeaders().append("Authorization", `Bearer ${localStorage.getItem('USER_JWT_TOKEN')}`);
+    let id = localStorage.getItem('user_id');
+    
+    return this.http
+    .post<{message: string, token: string, user: Candidate}>
+      (this.url.candidateGroupAdd, {id, idGroup}, {headers});
   }
 
   /*public getPaymentById(id): Observable<Result> {
