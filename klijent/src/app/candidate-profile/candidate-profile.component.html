@@ -128,18 +128,20 @@
                                                                <div class="full dis_flex center_text">
                                                                   <div class="profile_img"><img width="180" class="rounded-circle" src="../../assets/user_img.jpg" alt="#" /></div>
                                                                   <div class="profile_contant">
-                                                                     <div class="contact_inner">
-                                                                        <h3>Marko Mirković</h3>
+                                                                     
+                                                                     <div class="contact_inner" *ngIf = "candidate !=  null">
+                                                                        <h3>{{candidate.ime}} {{candidate.prezime}}</h3>
+
                                                                         <ul class="list-unstyled" >
-                                                                           <li style="font-size: 16px;"><i class="fa fa-key"></i> : <b>123abc</b></li>
+                                                                           <li style="font-size: 16px;"><i class="fa fa-key"></i> : <b>{{candidate.jmbg}}</b></li>
                                                                            <br>
-                                                                           <li style="font-size: 16px;"><i class="fa fa-envelope-o"></i> : <b>test@gmail.com</b></li>
+                                                                           <li style="font-size: 16px;"><i class="fa fa-envelope-o"></i> : <b>{{candidate.email}}</b></li>
                                                                            <br>
-                                                                           <li style="font-size: 16px;"><i class="fa fa-phone"></i> :   <b>060/1234567</b></li>
+                                                                           <li style="font-size: 16px;"><i class="fa fa-phone"></i> :   <b>{{candidate.telefon}}</b></li>
                                                                            <br>
-                                                                           <li style="font-size: 16px;"><i class="fa fa-birthday-cake"></i> : <b>12.12.2000.</b></li>
-                                                                           <li style="font-size: 16px;"><i class="fa fa-calendar"></i> : <b>25.12.2022.</b></li>
-                                                                           <li style="font-size: 16px;"><i class="fa fa-book"></i><b>  grupa</b> : /</li>
+                                                                           <li style="font-size: 16px;"><i class="fa fa-birthday-cake"></i> : <b>{{this.getDate()}}</b></li>
+                                                                           <li style="font-size: 16px;"><i class="fa fa-calendar"></i> : <b>{{this.getCurrentDate()}}</b></li>
+                                                                           <li style="font-size: 16px;"><i class="fa fa-book"></i><b>{{candidate.idGrupe}}</b> : /</li>
                                                                            <li style="font-size: 16px;"><i class="fa fa-car"></i><b> instruktor</b> : /</li>
                                                                         </ul>
                                                                      </div>
@@ -171,9 +173,24 @@
                                                       </div>
                                                    
                                                    </div>
-
-
                                                    
+                                                   <div class="msg_list_main">
+                                                      <ul class="msg_list">
+                                                         <li *ngFor = "let group of groups">
+                                                            <span><i class="fa fa-book" id="stiker"></i></span>
+                                                            <span>
+                                                            <span class="name_user">Grupa {{group.id}}</span>
+                                                            <span class="msg_user"><b>Ime predavača:</b> Instruktor {{group.id_instruktora}}</span><br>
+                                                            <span class="msg_user"><b>Početak nastave:</b> {{this.getCurrentDate()}}</span><br>
+                                                            <span class="msg_user"><b>Broj kandidata:</b> {{group.brojKandidata}}</span>
+                                                            </span>
+                                                            <div class="field margin_0" id="dugmeGrupa">
+                                                               <label class="label_field hidden">hidden label</label>
+                                                               <button class="main_bt_1">Izaberi grupu</button>
+                                                            </div>
+                                                         </li>
+                                                      </ul>
+                                                   </div> 
                                                 </div>
                                              </div>
                                              <div class="tab-pane fade" id="project_worked" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -295,10 +312,7 @@
                                                                </div>
                                                             </div>
                                                          </div>
-                                                      </div>
-                                                      
-                                                                    
-                                                          
+                                                      </div>  
                                                       <!-- end user profile section -->
                                                    </div>
                                                 </div>

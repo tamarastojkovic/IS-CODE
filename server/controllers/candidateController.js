@@ -63,26 +63,28 @@ const addGroup = async (req,res,next) => {
 }
 
 const loginUser = async (req, res, next) => {
-
-    const {id, lozinka} =req.body;
-   
-    if(id && lozinka){
-        var user = await candidateService.getCandidateById(id);
-    }
-
-    if(!user)
-      return res.status(401).json({message:"No such user"})
- 
-    if(await bcrypt.compare(lozinka, user.lozinka.hashPass)){
-
-      const token = jwt.generateJWT({id:user._id});
-      user.lozinka=undefined;
-     
-      return res.status(200).json({message:"Login successs,",token:token,user:user});
-      
+    try{
+        const {id, lozinka} =req.body;
     
+        if(id && lozinka){
+            var user = await candidateService.getCandidateById(id);
+            console.log(user);
+        }
+
+        if(!user)
+        return res.status(401).json({message:"No such user"})
+    
+        if(await bcrypt.compare(lozinka, user.lozinka.hashPass)){
+
+        const token = jwt.generateJWT({id:user._id});
+        user.lozinka=undefined;
+        
+        return res.status(200).json({message:"Login successs,",token:token,user:user});
+        }
+        return res.status(401).json({message:"Wrong password"});
+    }catch(error){
+        next(error);
     }
-     return res.status(401).json({message:"Wrong password"});
 }
 
 module.exports = {

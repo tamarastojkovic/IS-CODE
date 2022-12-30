@@ -73,6 +73,13 @@ export class AppRegisterComponent implements OnInit, OnDestroy {
     return this.registerForm.get('telefon');
   }
 
+  public candidateId() : String{
+    if(this.candidate != null){
+      return this.candidate._id;
+    }
+    return "0";
+  }
+
   ngOnDestroy(): void {
 
   }

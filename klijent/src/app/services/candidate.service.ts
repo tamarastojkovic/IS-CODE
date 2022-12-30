@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import {map} from 'rxjs/operators'
-import { ICandidate, Candidate } from '../models/candidate';
+import { Observable} from 'rxjs';
+import {tap} from 'rxjs/operators'
+import { ICandidate, Candidate} from '../models/candidate';
+import { CandidateDto } from '../models/candidateDto';
+import {IGroup, Group } from '../models/groups';
 
 /*interface Result{
   _id: string,
@@ -11,19 +13,17 @@ import { ICandidate, Candidate } from '../models/candidate';
 @Injectable({
   providedIn: 'root'
 })
+
 export class CandidateService {
 
+  private readonly url = {
+    login: `http://localhost:3002/candidate/login`,
+    candidateId: `http://localhost:3002/candidate/id`,
+    groups: `http://localhost:3002/group`
+  }
+  public currentUser : Candidate | undefined | null;
+  
   constructor(private http: HttpClient) { }
-
-  /*public getPayment(email): Observable<Payment | null>{
-    console.log(email)
-    return  this.http.get<IPayment| null>(`http://localhost:3000/payments/${email}`).pipe(
-      map( (payment:IPayment|null) => {
-        if(!payment)
-          return null;
-        return new Payment(payment._id,payment.name,payment.surname,payment.email,payment.amounts)})
-      )
-  }*/
 
   public addNewCandidate(ime: string, prezime:string, jmbg:string, telefon:string, email:string, slika:string):Observable<Candidate | null>{
     return this.http.post<ICandidate | null>(`http://localhost:3002/candidate/new`,{
@@ -37,10 +37,33 @@ export class CandidateService {
   }
 
   public login(id: string, lozinka:string):Observable<any>{
-    return this.http.post<any>(`http://localhost:3002/candidate/login`,{
-        id,
-        lozinka
-    })
+    
+    return this.http
+    .post<{message: string, token: string, user: Candidate}>
+      (this.url.login, {id, lozinka}).pipe(
+      tap((response: {message: string, 
+        token: string,
+        user: Candidate
+        }) =>
+        {
+          localStorage.setItem("USER_JWT_TOKEN", response.token);
+          localStorage.setItem("user_id", response.user._id);
+          this.currentUser = new Candidate(response.user._id, response.user.ime, response.user.prezime, response.user.lozinka, response.user.email, response.user.pol,
+            response.user.telefon, response.user.jmbg, response.user.datumRođenja, response.user.datumUpisa, response.user.idInstruktora, response.user.idGrupe);
+        }
+      )
+      );
+  }
+
+  public getCandidate(id: string):Observable<CandidateDto>{
+    let headers : HttpHeaders = new HttpHeaders().append("Authorization", `Bearer ${localStorage.getItem('USER_JWT_TOKEN')}`);
+
+    return this.http.get<Candidate>(this.url.candidateId+"/"+id, {headers});
+  }
+
+  public getAllGroups(): Observable<Group[]>{
+    let headers : HttpHeaders = new HttpHeaders().append("Authorization", `Bearer ${localStorage.getItem('USER_JWT_TOKEN')}`);
+    return this.http.get<Group[]>(this.url.groups, {headers});
   }
 
   /*public getPaymentById(id): Observable<Result> {

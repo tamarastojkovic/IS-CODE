@@ -37,7 +37,6 @@ const addNewCandidate = async function (ime, prezime, jmbg, telefon, email, slik
             ime: ime,
             prezime: prezime
         });
-    
 }
 
 const getCandidateById = async function (id) {
